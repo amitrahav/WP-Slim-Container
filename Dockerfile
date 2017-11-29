@@ -37,9 +37,17 @@ RUN apt-get update
 RUN apt-get -y install \
     curl 
 
+# Add Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer require wp-cli/wp-cli
-RUN ln -s /usr/share/wp-cli/bin/wp /usr/bin/wp
+
+# Add WP-CLI, https://github.com/conetix/docker-wordpress-wp-cli example
+RUN curl -o /bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+COPY wp-su.sh /bin/wp
+RUN chmod +x /bin/wp-cli.phar /bin/wp
+
+# Cleanup
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 CMD ["php-fpm"]
 
