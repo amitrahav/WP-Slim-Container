@@ -38,6 +38,8 @@ RUN apt-get -y install \
     curl 
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN composer require wp-cli/wp-cli
+RUN ln -s /usr/share/wp-cli/bin/wp /usr/bin/wp
 
 CMD ["php-fpm"]
 
