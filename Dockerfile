@@ -43,7 +43,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # ensure www-data user exists
 RUN set -x ; \
   addgroup -g 82 -S www-data ; \
-  adduser -u 82 -D -S -G www-data www-data && exit 0 ; exit 1
+  adduser -u 82 -D -S -G www-data www-data
 
 # Add WP-CLI, https://github.com/conetix/docker-wordpress-wp-cli example
 RUN curl -o /bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
