@@ -41,9 +41,9 @@ RUN apt-get -y install \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # ensure www-data user exists
-RUN set -x ; \
-  addgroup -g 82 -S www-data ; \
-  adduser -u 82 -D -S -G www-data www-data
+RUN usermod -u 1000 www-data
+RUN usermod -G staff www-data
+
 
 # Add WP-CLI, https://github.com/conetix/docker-wordpress-wp-cli example
 RUN curl -o /bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
