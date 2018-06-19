@@ -2,15 +2,20 @@
 
 FROM php:7.1-fpm
 
+# Configure postfix mail server
+# RUN apt-get install -y --no-install-recommends debconf && export DEBIAN_FRONTEND=noninteractive 
+#    && debconf-set-selections <<< "postfix postfix/mailname $(-e myhostname)"" \
+#    && debconf-set-selections <<< "postfix postfix/main_mailer_type $(-e main_mailer_type)
+
 # install essnsial server stuff
-RUN apt-get update \
+RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
-        libpng12-dev \
+        libpng-dev \
         libz-dev \
         less \
-        postfix \
+        # postfix \
         mysql-client \
     && docker-php-ext-install -j$(nproc) \
         mysqli \
@@ -24,8 +29,7 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean
     
-# Configure postfix mail server
-#RUN postconf -e myhostname=
+
 
 # Install OS utilities
 RUN apt-get update
