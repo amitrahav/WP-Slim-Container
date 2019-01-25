@@ -14,7 +14,7 @@
 
 5. Ready to build with codeBuild AWS
 
-6. [Postfix](http://www.postfix.org/)
+6. AWS cli tools
 
 ## CodeBuild Usage
 
@@ -27,3 +27,5 @@
     * AWS_ACCOUNT_ID - your account ID
     * IMAGE_TAG - probebly should be latest
     * AWS_DEFAULT_REGION - default region
+    * AWS_ACCESS_KEY_ID - access key for allowing ecr get-login inside the docker
+    * AWS_SECRET_ACCESS_KEY - secret key for allowing ecr get-login inside the docker
