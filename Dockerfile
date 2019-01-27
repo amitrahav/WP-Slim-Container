@@ -56,6 +56,7 @@ RUN apt-get update && \
 
 RUN pip3 --no-cache-dir install --upgrade awscli
 
+# install docker
 RUN apt-get update && \
     apt-get install -y \
     apt-transport-https \
@@ -71,5 +72,7 @@ RUN apt-get update && \
 
 RUN apt-get update && \
     apt-get install -y docker-ce
+
+COPY dockerd-entrypoint.sh /usr/local/bin/
 
 EXPOSE 9000
