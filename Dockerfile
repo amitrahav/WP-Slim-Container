@@ -1,13 +1,5 @@
 FROM php:7.1-fpm
 
-ARG AWS_DEFAULT_REGION 
-ARG AWS_ACCESS_KEY_ID 
-ARG AWS_SECRET_ACCESS_KEY 
-
-ENV AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
-ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-
 # install essnsial server stuff
 RUN apt-get update \
     && apt-get install -y \
@@ -63,10 +55,5 @@ RUN apt-get update && \
     && apt-get clean
 
 RUN pip3 --no-cache-dir install --upgrade awscli
-
-# adding defualt region
-RUN mkdir ~/.aws 
-RUN echo '[default]\n region = '$AWS_DEFAULT_REGION >> ~/.aws/config
-RUN echo '[default]\naws_access_key_id = '$AWS_ACCESS_KEY_ID '\naws_secret_access_key = ' $AWS_SECRET_ACCESS_KEY >> ~/.aws/credentials
 
 EXPOSE 9000
