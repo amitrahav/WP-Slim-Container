@@ -46,14 +46,30 @@ RUN chmod +x /bin/wp-cli.phar /bin/wp
 # Aws cli tools
 RUN apt-get update && \
     apt-get install -y \
-        groff \
-        less \
-        python3 \
-        python3-pip \
-        python3-setuptools \
+    groff \
+    less \
+    python3 \
+    python3-pip \
+    python3-setuptools \
     && pip3 install --upgrade pip \
     && apt-get clean
 
 RUN pip3 --no-cache-dir install --upgrade awscli
+
+RUN apt-get update && \
+    apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg2 \
+    software-properties-common \
+    && curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
+    && add-apt-repository \
+    "deb [arch=amd64] https://download.docker.com/linux/debian \
+    $(lsb_release -cs) \
+    stable"
+
+RUN apt-get update && \
+    apt-get install -y docker-ce
 
 EXPOSE 9000
