@@ -10,7 +10,7 @@
 
 3. [Wp cli](https://wp-cli.org/)
 
-4. mysql-client (not a server)
+4. mariadb-client (not a server)
 
 5. Ready to build with codeBuild AWS
 
